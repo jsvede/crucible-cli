@@ -1,17 +1,19 @@
 package com.loquatic.crucible.cli.actions;
 
-import java.io.BufferedReader ;
-import java.io.File ;
-import java.io.FileNotFoundException ;
-import java.io.FileReader ;
-import java.io.IOException ;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
-import org.codehaus.jackson.JsonParseException ;
-import org.codehaus.jackson.map.JsonMappingException ;
-import org.codehaus.jackson.map.ObjectMapper ;
-import org.codehaus.jackson.map.SerializationConfig ;
+import org.apache.commons.cli.CommandLine;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 
-import com.loquatic.crucible.json.IProtocolHandler ;
+import com.loquatic.crucible.cli.CommandLineOption;
+import com.loquatic.crucible.json.IProtocolHandler;
 
 public abstract class AbstractAction implements IAction {
 	
@@ -111,6 +113,48 @@ public abstract class AbstractAction implements IAction {
 		}
 		
 		return target ;
+	}
+	
+	protected String getAllowOthersToJoin( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.ALLOW_OTHERS_TO_JOIN ) ;
+	}
+	
+	protected String getProjectKey( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.PROJECT_KEY ) ;
+	}
+	
+	protected String getDescription( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.DESCRIPTION ) ;
+	}
+	
+	protected String getReviewName( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.REVIEW_NAME ) ;
+	}
+	
+	protected String getReviewers( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.REVIEWERS ) ;
+	}
+	
+	protected String getReviewId( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.REVIEW_ID ) ;
+	}
+	
+	protected String getChangeSet( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.CHANGESET ) ;
+	}
+	
+	protected String getRepoName( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.REPOSITORY ) ;
+	}
+	
+	protected String getUserName( CommandLine cmdLine ) {
+		return getCommandLineOption( cmdLine, CommandLineOption.USERNAME ) ;
+	}
+	
+	protected String getCommandLineOption( CommandLine commandLine, CommandLineOption option ) {
+		
+		return commandLine.getOptionValue( option.getName() ) ;
+		
 	}
 
 }
