@@ -1,19 +1,21 @@
 package com.loquatic.crucible.cli;
 
-import java.util.HashMap ;
-import java.util.Properties ;
+import java.util.HashMap;
+import java.util.Properties;
 
-import org.apache.commons.cli.CommandLine ;
-import org.apache.commons.cli.Options ;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.Options;
 
-import com.loquatic.crucible.cli.actions.AbandonReviewAction ;
-import com.loquatic.crucible.cli.actions.CloseReviewAction ;
-import com.loquatic.crucible.cli.actions.CreateAuthTokenAction ;
-import com.loquatic.crucible.cli.actions.CreateReviewAction ;
-import com.loquatic.crucible.cli.actions.IAction ;
-import com.loquatic.crucible.cli.actions.SummarizeAndCloseReviewAction ;
-import com.loquatic.crucible.cli.actions.SummarizeReviewAction ;
-import com.loquatic.crucible.json.IProtocolHandler ;
+import com.loquatic.crucible.cli.actions.AbandonReviewAction;
+import com.loquatic.crucible.cli.actions.AddChangesetAction;
+import com.loquatic.crucible.cli.actions.AddReviewersAction;
+import com.loquatic.crucible.cli.actions.CloseReviewAction;
+import com.loquatic.crucible.cli.actions.CreateAuthTokenAction;
+import com.loquatic.crucible.cli.actions.CreateReviewAction;
+import com.loquatic.crucible.cli.actions.IAction;
+import com.loquatic.crucible.cli.actions.SummarizeAndCloseReviewAction;
+import com.loquatic.crucible.cli.actions.SummarizeReviewAction;
+import com.loquatic.crucible.json.IProtocolHandler;
 
 /**
  * This dispatcher routes user input to the specified action.
@@ -33,6 +35,8 @@ public class ActionDispatcher {
 		actions.put( Action.CLOSE_REVIEW.getName(), new CloseReviewAction(handler) ) ;
 		actions.put( Action.SUMMARIZE_REVIEW.getName(), new SummarizeReviewAction(handler) ) ;
 		actions.put( Action.SUMMARIZE_AND_CLOSE_REVIEW.getName(), new SummarizeAndCloseReviewAction(handler) ) ;
+		actions.put( Action.ADD_REVIEWERS_TO_REVIEW.getName(), new AddReviewersAction( handler ) ) ;
+		actions.put( Action.ADD_CHANGESETS_TO_REVIEW.getName(), new AddChangesetAction( handler) ) ;
 	}
 	
 	/**
