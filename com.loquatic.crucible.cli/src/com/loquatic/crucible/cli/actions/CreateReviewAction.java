@@ -84,31 +84,37 @@ public class CreateReviewAction extends AbstractAction {
 	}
 	
 	public boolean addChangeSetToReview( Properties props, String reviewId, String changeSet, String repoName ) {
-		AddChangesetWrapper changeSetWrapper = createChangesetData( reviewId, repoName ) ;
+		AddChangesetWrapper changeSetWrapper = createChangesetData( changeSet, repoName ) ;
 		boolean success = false ;
 		
 		StringBuilder url = TargetUrlUtil.createReviewUrl(  props ) ;
 		
 		//TODO: fix this, it's horrible
-		url.append(  "/" ).append( reviewId ).append("/addChangeset").append( "?" ).append("FEAUTH=").append( getToken() ) ;
+		url.append( reviewId ).append("/addChangeset").append( "?" ).append("FEAUTH=").append( getToken() ) ;
 		
+		System.out.println( "URL: " + url.toString() ) ;
 		try {
 			String jsonChangeset = createJsonString( changeSetWrapper ) ;
 			
+			System.out.println( "Changeset request: " + jsonChangeset ) ;
+			
 			ResponseData response  = getHandler().doPost( jsonChangeset, url.toString() ) ;
 			
-			if( response.getHttpStatusCode() >= 200 && response.getHttpStatusCode() > 300 ) {
+			if( response.getHttpStatusCode() >= 200 && response.getHttpStatusCode() < 300 ) {
 				System.out.println( "Successfully added changeset " + changeSet + 
 						                " to review " + reviewId + " in repo " + repoName  ) ;
-				
+				System.out.println( "status: " + response.getStatusLine() + "\n\tresponse data: " + response.getResponseString() ) ;
 				success = true ;
+			} else {
+				System.out.println( "Unable to add changeset(s) " + changeSet + " to review " + reviewId ) ;
+				System.out.println( "System returned: " + response.getStatusLine() ) ;
 			}
 		} catch ( Exception e ) {
 			e.printStackTrace();
 		}
 
 		
-		return false ;
+		return success ;
 	}
 	
 	public  AddChangesetWrapper createChangesetData( String revision, String repoName ) {
@@ -123,8 +129,8 @@ public class CreateReviewAction extends AbstractAction {
 			ChangesetData changesetData = new ChangesetData();
 			changesetData.setId(aRevision);
 			addChangeset.addChangesetData(changesetData);
+			wrapper.setAddChangeset( addChangeset ) ;
 		}
-		wrapper.setAddChangeset( addChangeset ) ;
 		
 		wrapper.setRepository( repoName ) ;
 		
@@ -171,7 +177,8 @@ public class CreateReviewAction extends AbstractAction {
 		
 		appendAuthToken( url ) ;
 		
-		System.out.println( "targetUrl: " + url.toString() ) ;
+		System.out.println( "[POST] targetUrl: " + url.toString() ) ;
+		System.out.println( "payload: " + jsonString ) ;
 		
 		try {
 			ResponseData response = getHandler().doPost( jsonString, url.toString() ) ;
@@ -203,7 +210,7 @@ public class CreateReviewAction extends AbstractAction {
 				                 true, 
 				                 "Required. The id from the SCM for this " +
 				                 "Crucible project that this review will reference." ) ;
-		myOptions.addOption( "projectKey", 
+		myOptions.addOption( CommandLineOption.PROJECT_KEY.getName(), 
 				                 true, 
 				                 "Required. The project key from Crucible " +
 				                 "for this change." ) ;
