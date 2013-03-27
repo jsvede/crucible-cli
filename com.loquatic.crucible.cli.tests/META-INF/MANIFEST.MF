@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: com.loquatic.crucible.cli.tests
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0
 Bundle-Vendor: LOQUATIC
 Fragment-Host: com.loquatic.crucible.cli;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

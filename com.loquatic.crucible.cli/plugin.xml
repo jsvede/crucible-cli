@@ -7,7 +7,7 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="com.effectiveui.crucible.cli.Application">
+               class="com.loquatic.crucible.cli.Application">
          </run>
       </application>
    </extension>
