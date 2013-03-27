@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Commons CLI
+Bundle-SymbolicName: org.apache.commons.cli
+Bundle-Version: 1.2.0
+Bundle-ClassPath: commons-cli-1.2.jar
+Export-Package: org.apache.commons.cli;version="1.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

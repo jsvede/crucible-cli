@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Crucible Command Line Interface
+Bundle-SymbolicName: com.loquatic.crucible.cli;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: EFFECTIVEUI
+Require-Bundle: org.eclipse.core.runtime,
+ org.apache.commons.cli;bundle-version="1.2.0",
+ org.apache.httpcomponents.httpclient;bundle-version="4.2.3",
+ org.codehaus.jackson.mapper.asl;bundle-version="1.9.12",
+ org.codehaus.jackson.core.asl;bundle-version="1.9.12",
+ com.loquatic.crucible.rest.api;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

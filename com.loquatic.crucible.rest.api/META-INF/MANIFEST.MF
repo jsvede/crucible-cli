@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Crucible REST API
+Bundle-SymbolicName: com.loquatic.crucible.rest.api
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: EFFECTIVEUI
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.codehaus.jackson.annotate
+Export-Package: com.loquatic.crucible.rest.api
+Require-Bundle: org.codehaus.jackson.mapper.asl;bundle-version="1.9.12",
+ org.codehaus.jackson.core.asl;bundle-version="1.9.12"

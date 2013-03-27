@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.effectiveui.crucible.cli.feature"
+      label="Crucuble CLI Feature"
+      version="1.0.0"
+      provider-name="Effective UI">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.apache.commons.cli" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="com.loquatic.crucible.rest.api" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.httpcomponents.httpclient" version="4.2.3" match="greaterOrEqual"/>
+      <import plugin="org.codehaus.jackson.mapper.asl" version="1.9.12" match="greaterOrEqual"/>
+      <import plugin="org.codehaus.jackson.core.asl" version="1.9.12" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.loquatic.crucible.cli"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.loquatic.crucible.rest.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
