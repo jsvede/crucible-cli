@@ -40,14 +40,16 @@ public class AddChangesetAction extends AbstractAction {
                 "Crucible project that this review will reference." ) ;
 		options.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
                 "name of the repository as defined in Crucible." ) ;
+		options.addOption( CommandLineOption.REVIEW_ID.getName(), true, "The ID of the review you wish to close." ) ;
+
 
 		return true ;
 	}
 
 	@Override
 	public void printHelp() {
-		// TODO Auto-generated method stub
-
+		System.out.println( "--action addChangeset --reviewId PROJ-ID --changeset 99999 --repository repoName" ) ;
+		System.out.println( "--action addChangeset --reviewId PROJ-ID --changeset 99999,88888,77777 --repository repoName" ) ;
 	}
 	
 	public boolean addChangeSetToReview( Properties props, String reviewId, String changeSet, String repoName ) {
