@@ -19,9 +19,9 @@ public class AddReviewersAction extends AbstractAction {
 	@Override
 	public boolean perform(CommandLine commandLine, Properties props) {
 		
-		String reviewers = getReviewId( commandLine ) ; 
+		String reviewers = getReviewers( commandLine ) ; 
 
-		String reviewId = getReviewers( commandLine ) ; 
+		String reviewId =  getReviewId( commandLine ) ;
 		
 		boolean success = addReviewersToReview(props, reviewId, reviewers ) ;
 				
