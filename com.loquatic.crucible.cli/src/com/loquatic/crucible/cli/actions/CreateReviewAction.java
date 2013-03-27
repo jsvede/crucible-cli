@@ -83,7 +83,7 @@ public class CreateReviewAction extends AbstractAction {
 		return success ;
 	}
 	
-	private boolean addChangeSetToReview( Properties props, String reviewId, String changeSet, String repoName ) {
+	public boolean addChangeSetToReview( Properties props, String reviewId, String changeSet, String repoName ) {
 		AddChangesetWrapper changeSetWrapper = createChangesetData( reviewId, repoName ) ;
 		boolean success = false ;
 		
@@ -112,15 +112,18 @@ public class CreateReviewAction extends AbstractAction {
 	}
 	
 	public  AddChangesetWrapper createChangesetData( String revision, String repoName ) {
-		ChangesetData changesetData = new ChangesetData() ;
-		changesetData.setId( revision ) ;
 		
 		AddChangeset addChangeset = new AddChangeset() ;
 		
-		addChangeset.addChangesetData( changesetData ) ;
-		
 		AddChangesetWrapper wrapper = new AddChangesetWrapper() ;
+
+		String[] changeSets = revision.split(",") ;
 		
+		for ( String aRevision : changeSets ) {
+			ChangesetData changesetData = new ChangesetData();
+			changesetData.setId(aRevision);
+			addChangeset.addChangesetData(changesetData);
+		}
 		wrapper.setAddChangeset( addChangeset ) ;
 		
 		wrapper.setRepository( repoName ) ;
