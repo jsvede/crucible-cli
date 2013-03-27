@@ -15,7 +15,9 @@ public enum Action {
 	CLOSE_REVIEW( "closeReview" ),
 	CREATE_AUTH_TOKEN( "createToken" ),
 	ABANDON_REVIEW( "abandonReview" ),
-	SUMMARIZE_AND_CLOSE_REVIEW("summarizeAndCloseReview" ) ;
+	SUMMARIZE_AND_CLOSE_REVIEW("summarizeAndCloseReview" ),
+	ADD_REVIEWERS_TO_REVIEW( "addReviewers" ),
+	ADD_CHANGESETS_TO_REVIEW( "addChangesets" );
 	
 	private String name ;
 	
