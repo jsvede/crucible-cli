@@ -12,6 +12,7 @@ import org.codehaus.jackson.JsonParseException ;
 import org.codehaus.jackson.map.JsonMappingException ;
 import org.codehaus.jackson.map.ObjectMapper ;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
 import com.loquatic.crucible.json.ResponseData ;
@@ -23,6 +24,7 @@ public class CreateAuthTokenAction extends AbstractAction {
 	
 	public CreateAuthTokenAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
+		setAction( Action.CREATE_AUTH_TOKEN ) ;
 	}
 
 	@Override

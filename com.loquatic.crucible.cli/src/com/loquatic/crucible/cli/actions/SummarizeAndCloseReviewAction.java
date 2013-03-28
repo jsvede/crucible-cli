@@ -6,6 +6,7 @@ import java.util.Properties ;
 import org.apache.commons.cli.CommandLine ;
 import org.apache.commons.cli.Options ;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.json.IProtocolHandler ;
 
 public class SummarizeAndCloseReviewAction extends AbstractAction {
@@ -18,6 +19,8 @@ public class SummarizeAndCloseReviewAction extends AbstractAction {
 		actions = new LinkedList<IAction>() ;
 		actions.add( new SummarizeReviewAction( handler ) ) ;
 		actions.add( new CloseReviewAction( handler ) ) ;
+		
+		setAction( Action.SUMMARIZE_AND_CLOSE_REVIEW ) ;
 	}
 
 	@Override

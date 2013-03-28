@@ -5,6 +5,7 @@ import java.util.Properties ;
 import org.apache.commons.cli.CommandLine ;
 import org.apache.commons.cli.Options ;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
 import com.loquatic.crucible.json.JsonHandler ;
@@ -17,6 +18,7 @@ public class SummarizeReviewAction extends AbstractAction {
 	
 	public SummarizeReviewAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
+		setAction( Action.SUMMARIZE_REVIEW ) ;
 	}
 
 	@Override

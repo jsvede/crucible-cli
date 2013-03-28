@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption;
 import com.loquatic.crucible.json.IProtocolHandler;
 import com.loquatic.crucible.json.ResponseData;
@@ -14,6 +15,7 @@ public class AddReviewersAction extends AbstractAction {
 
 	public AddReviewersAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
+		setAction( Action.ADD_REVIEWERS_TO_REVIEW ) ;
 	}
 	
 	@Override

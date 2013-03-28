@@ -6,6 +6,7 @@ import org.apache.commons.cli.CommandLine ;
 import org.apache.commons.cli.HelpFormatter ;
 import org.apache.commons.cli.Options ;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
 import com.loquatic.crucible.json.JsonHandler ;
@@ -48,6 +49,9 @@ public class CreateReviewAction extends AbstractAction {
 
 	public CreateReviewAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
+		setAction( Action.CREATE_REVIEW ) ;
+		myOptions = new Options() ;
+		addOptions( myOptions ) ;
 	}
 
 	@Override
@@ -114,32 +118,37 @@ public class CreateReviewAction extends AbstractAction {
 
 	@Override
 	public boolean addOptions(Options options) {
-		myOptions = options ;
-		
-		myOptions.addOption( CommandLineOption.PROJECT_KEY.getName(), 
+
+		options.addOption( CommandLineOption.PROJECT_KEY.getName(), 
 				                 true, 
 				                 "Required. The project key from Crucible " +
 				                 "for this change." ) ;
-		myOptions.addOption( CommandLineOption.REVIEW_NAME.getName(), 
+		options.addOption( CommandLineOption.REVIEW_NAME.getName(), 
 				                 true, 
 				                 "Optional The name of this " +
 				                 "review that will be shown in Crucible. Defaults " +
 				                 "to 'Review for commit xxxx' where xxxx is the " +
 				                 "changeset specfied.") ;
-		myOptions.addOption( CommandLineOption.DESCRIPTION.getName(), 
+		options.addOption( CommandLineOption.DESCRIPTION.getName(), 
 				                 true, 
 				                 "Required. A description of the changeset being " +
 				                 "reviewed." ) ;
-		myOptions.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
+		options.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
 				                 true, 
 				                 "Optional. Defaults to true." ) ;
-		myOptions.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
+		options.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
 				                 "name of the repository as defined in Crucible." ) ;
 		return true;
 	}
 
 	@Override
 	public void printHelp() {
+		
+		HelpFormatter helpFormatter = new HelpFormatter();
+		helpFormatter.printHelp( getActionName(), myOptions ) ;
+
+		System.out.println( "\n\nExamples:" ) ;
+		System.out.println( "-------------------------------------------------" ) ;
 		System.out.println( "--action createReview --projectKey PROJ-ID " +
 			 	            "--reviewName \"My Review of Foo\" --description \"Review of my changes to Foo.\"" +
 				            "--repository myRepo --allowOtherToJoin true" ) ;

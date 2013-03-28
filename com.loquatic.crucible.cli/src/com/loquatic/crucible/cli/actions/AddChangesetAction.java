@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption;
 import com.loquatic.crucible.json.IProtocolHandler;
 import com.loquatic.crucible.json.ResponseData;
@@ -17,6 +18,7 @@ public class AddChangesetAction extends AbstractAction {
 	
 	public AddChangesetAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
+		setAction( Action.ADD_CHANGESETS_TO_REVIEW ) ;
 	}
 
 	@Override
@@ -27,8 +29,15 @@ public class AddChangesetAction extends AbstractAction {
 		String changeSet = getChangeSet( commandLine ) ;
 		String repoName = getRepoName( commandLine ) ;
 		
-		success = addChangeSetToReview( props, reviewId, changeSet, repoName ) ;
-
+		String[] changesetIds = changeSet.split(",");
+		System.out.println( "Found " + changesetIds.length + " review ids" ) ;
+		for( String changesetIdForRvw : changesetIds ) {
+			System.out.println( "Add changeset " + changesetIdForRvw + " to the review " + reviewId ) ;
+			success = addChangeSetToReview( props, reviewId, changesetIdForRvw, repoName ) ;
+			if( !success ) {
+				return false ;
+			}
+		}
 		return success ;
 	}
 
@@ -62,6 +71,7 @@ public class AddChangesetAction extends AbstractAction {
 		url.append( reviewId ).append("/addChangeset").append( "?" ).append("FEAUTH=").append( getToken() ) ;
 		
 		System.out.println( "URL: " + url.toString() ) ;
+		
 		try {
 			String jsonChangeset = createJsonString( changeSetWrapper ) ;
 			

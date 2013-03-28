@@ -5,6 +5,7 @@ import java.util.Properties ;
 import org.apache.commons.cli.CommandLine ;
 import org.apache.commons.cli.Options ;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
 import com.loquatic.crucible.json.JsonHandler ;
@@ -23,6 +24,7 @@ public class AbandonReviewAction extends AbstractAction {
 
 	public AbandonReviewAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
+		setAction( Action.ABANDON_REVIEW ) ;
 	}
 
 	@Override
