@@ -12,11 +12,13 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
+import com.loquatic.crucible.cli.Action;
 import com.loquatic.crucible.cli.CommandLineOption;
 import com.loquatic.crucible.json.IProtocolHandler;
 
 public abstract class AbstractAction implements IAction {
 	
+	private Action action ;
 	private String token ;
 	private String tokenFileName ;
 	private File tokenFile ;
@@ -115,6 +117,19 @@ public abstract class AbstractAction implements IAction {
 		return target ;
 	}
 	
+	
+	public String getActionName() {
+		return action.getName() ;
+	}
+	
+	protected Action getAction() {
+		return action;
+	}
+
+	protected void setAction(Action action) {
+		this.action = action;
+	}
+
 	protected String getAllowOthersToJoin( CommandLine cmdLine ) {
 		return getCommandLineOption( cmdLine, CommandLineOption.ALLOW_OTHERS_TO_JOIN ) ;
 	}
