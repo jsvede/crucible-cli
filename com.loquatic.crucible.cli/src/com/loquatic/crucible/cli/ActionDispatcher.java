@@ -25,18 +25,18 @@ import com.loquatic.crucible.json.IProtocolHandler;
  */
 public class ActionDispatcher {
 	
-	private HashMap<String, IAction> actions ;
+	private HashMap<Action, IAction> actions ;
 	
 	public ActionDispatcher( IProtocolHandler handler ) {
-		actions = new HashMap<String,IAction>() ;
-		actions.put(Action.CREATE_REVIEW.getName(), new CreateReviewAction(handler) ) ;
-		actions.put( Action.CREATE_AUTH_TOKEN.getName(), new CreateAuthTokenAction(handler) ) ;
-		actions.put( Action.ABANDON_REVIEW.getName(), new AbandonReviewAction(handler) ) ; 
-		actions.put( Action.CLOSE_REVIEW.getName(), new CloseReviewAction(handler) ) ;
-		actions.put( Action.SUMMARIZE_REVIEW.getName(), new SummarizeReviewAction(handler) ) ;
-		actions.put( Action.SUMMARIZE_AND_CLOSE_REVIEW.getName(), new SummarizeAndCloseReviewAction(handler) ) ;
-		actions.put( Action.ADD_REVIEWERS_TO_REVIEW.getName(), new AddReviewersAction( handler ) ) ;
-		actions.put( Action.ADD_CHANGESETS_TO_REVIEW.getName(), new AddChangesetAction( handler) ) ;
+		actions = new HashMap<Action,IAction>() ;
+		actions.put( Action.CREATE_REVIEW, new CreateReviewAction(handler) ) ;
+		actions.put( Action.CREATE_AUTH_TOKEN, new CreateAuthTokenAction(handler) ) ;
+		actions.put( Action.ABANDON_REVIEW, new AbandonReviewAction(handler) ) ; 
+		actions.put( Action.CLOSE_REVIEW, new CloseReviewAction(handler) ) ;
+		actions.put( Action.SUMMARIZE_REVIEW, new SummarizeReviewAction(handler) ) ;
+		actions.put( Action.SUMMARIZE_AND_CLOSE_REVIEW, new SummarizeAndCloseReviewAction(handler) ) ;
+		actions.put( Action.ADD_REVIEWERS_TO_REVIEW, new AddReviewersAction( handler ) ) ;
+		actions.put( Action.ADD_CHANGESETS_TO_REVIEW, new AddChangesetAction( handler) ) ;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class ActionDispatcher {
 	 * 
 	 * @return
 	 */
-	public HashMap<String, IAction> getRegisteredActions() {
+	public HashMap<Action, IAction> getRegisteredActions() {
 		return actions ;
 	}
 	 
@@ -63,7 +63,7 @@ public class ActionDispatcher {
 		boolean success = false ;
 		
 		if( action != null ) {
-			IAction myAction = actions.get( action.getName() ) ;
+			IAction myAction = actions.get( action ) ;
 			success = myAction.perform( commandLine, props ) ;
 		}
 		
