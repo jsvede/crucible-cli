@@ -30,6 +30,13 @@ public interface IAction {
 	/**
 	 * Prints the help for this action.
 	 */
-	public void printHelp() ; 
+	public void printHelp() ;
+	
+	/**
+	 * Returns the string that should be passed to the --action argument
+	 * when invoking the tool.
+	 * @return
+	 */
+	public String getActionName() ;
 
 }
