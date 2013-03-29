@@ -30,17 +30,12 @@ package com.loquatic.crucible.cli.actions;
 import java.util.Properties ;
 
 import org.apache.commons.cli.CommandLine ;
-import org.apache.commons.cli.HelpFormatter ;
 import org.apache.commons.cli.Options ;
 
-import com.loquatic.crucible.cli.Action;
+import com.loquatic.crucible.cli.Action ;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
-import com.loquatic.crucible.json.JsonHandler ;
 import com.loquatic.crucible.json.ResponseData ;
-import com.loquatic.crucible.rest.api.AddChangeset ;
-import com.loquatic.crucible.rest.api.AddChangesetWrapper ;
-import com.loquatic.crucible.rest.api.ChangesetData ;
 import com.loquatic.crucible.rest.api.ReviewData ;
 import com.loquatic.crucible.rest.api.State ;
 import com.loquatic.crucible.rest.api.UserData ;
@@ -70,10 +65,6 @@ import com.loquatic.crucible.util.TargetUrlUtil ;
  */
 public class CreateReviewAction extends AbstractAction {
 	
-	private Options myOptions ;
-	
-	
-
 	public CreateReviewAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
 		setAction( Action.CREATE_REVIEW ) ;
@@ -168,25 +159,31 @@ public class CreateReviewAction extends AbstractAction {
 		return true;
 	}
 
+	
 	@Override
-	public void printHelp() {
-		
-		System.out.println( "Create a new review in the specificied Crucible instance.\n" ) ;
-		System.out.println( "Typically used in conjuction with addReviewers and addChangesets.\n" ) ;
-		System.out.println( "Note: reviews without reviewers get created in a draft state and don't " +
+	public String getHelpOverview() {
+		StringBuilder helpOverviewSb = new StringBuilder() ;
+		helpOverviewSb.append( "Create a new review in the specificied Crucible instance.\n" ) ;
+		helpOverviewSb.append( "Typically used in conjuction with addReviewers and addChangesets.\n" ) ;
+		helpOverviewSb.append( "Note: reviews without reviewers get created in a draft state and don't " +
 				"move into the 'out for review' queue till you add users.\n\n" ) ;
-		
-		HelpFormatter helpFormatter = new HelpFormatter();
-		helpFormatter.printHelp( getActionName(), myOptions ) ;
 
-		System.out.println( "\n\nExamples:" ) ;
-		System.out.println( "-------------------------------------------------" ) ;
-		System.out.println( "--action createReview --projectKey PROJ-ID " +
+		return helpOverviewSb.toString() ;
+	}
+
+	@Override
+	public String getHelpExamples() {
+		StringBuilder helpExamplesSb = new StringBuilder() ;
+		helpExamplesSb.append( "\n\nExamples:\n" ) ;
+		helpExamplesSb.append( "-------------------------------------------------\n" ) ;
+		helpExamplesSb.append( "--action createReview --projectKey PROJ-ID " +
 			 	            "--reviewName \"My Review of Foo\" --description \"Review of my changes to Foo.\"" +
 				            "--repository myRepo --allowOtherToJoin true" ) ;
 		
-	} 
-	
+
+		return null ;
+	}
+
 	private ReviewData createReviewData( CommandLine commandLine ) {
 		String author = getUserName( commandLine );
 		String reviewTitle = getReviewName( commandLine ) ;
