@@ -84,15 +84,12 @@ public class UserInputProcessor {
 						           "The Crucible username under which to " +
 								       "perform this action; required if the app " +
 								       "hasn't stored an authentication token.");
-		options.addOption( CommandLineOption.PASSWORD.getName(), 
-				               true,
-				               "The password associated with the username provided.");
-		options.addOption( CommandLineOption.CACHE_AUTH.getName(), 
-				               true,
-				               "defaults to false; when set to true the app will " +
-						           "store the authToken for future. When the authToken is " +
-						           "stored, the user won't need to provide username " +
-						           "and password.");
+//		options.addOption( CommandLineOption.CACHE_AUTH.getName(), 
+//				               true,
+//				               "defaults to false; when set to true the app will " +
+//						           "store the authToken for future. When the authToken is " +
+//						           "stored, the user won't need to provide username " +
+//						           "and password.");
 		options.addOption( CommandLineOption.CONFIG.getName(),
 						            true,
 						            "defines the path to the configuration file. A " +
@@ -177,14 +174,14 @@ public class UserInputProcessor {
 	 * @param dispatcher
 	 */
 	private void printHelp( Options options, ActionDispatcher dispatcher, String actionName )  {
-//		HelpFormatter helpFormatter = new HelpFormatter();
-//		helpFormatter.printHelp(name, options);
 		
 		System.out.print( "\n" ) ;
 		
 		Map<Action, IAction> actionsMap = dispatcher.getRegisteredActions() ;
 		
 		if( actionName == null ) {
+			HelpFormatter helpFormatter = new HelpFormatter();
+			helpFormatter.printHelp(name, options);
 			System.out.println( "-------------------------------------------") ;
 			System.out.println( "Examples of available Actions:" ) ;
 			for( Action action : actionsMap.keySet() ) {
