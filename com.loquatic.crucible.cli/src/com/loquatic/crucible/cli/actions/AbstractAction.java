@@ -34,6 +34,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter ;
+import org.apache.commons.cli.Options ;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -50,11 +52,13 @@ public abstract class AbstractAction implements IAction {
 	private String tokenFileName ;
 	private File tokenFile ;
 	
+	protected Options myOptions ;
+	
 	protected IProtocolHandler handler ;
 	
 	public AbstractAction() {
 		String userHomeDir = System.getProperty( "user.home" ) ;
-		String tknFileName = "crucible.tkn" ;
+		String tknFileName = "crucible-cli.tkn" ;
 
 		StringBuilder fileNameBuilder = new StringBuilder() ;
 		fileNameBuilder.append( userHomeDir ).append( File.separator).append( tknFileName ) ;
@@ -71,6 +75,7 @@ public abstract class AbstractAction implements IAction {
 	public AbstractAction( IProtocolHandler myHandler ) {
 		this() ;
 		setHandler( myHandler ) ;
+		myOptions = new Options() ;
 	}
 	
 	public void setHandler( IProtocolHandler myHandler ) {
@@ -144,6 +149,32 @@ public abstract class AbstractAction implements IAction {
 		return target ;
 	}
 	
+	/**
+	 * The main main help entry point. Calls each subclasses 
+	 * getHelOverview() and getHelpExamples() methods. Provides
+	 * a fairly consistent way of formatting and presenting 
+	 * help to end users.
+	 */
+	@Override
+	public void printHelp() {
+		
+		System.out.println( getHelpOverview() ) ;
+		
+		HelpFormatter helpFormatter = new HelpFormatter();
+		helpFormatter.printHelp( getActionName(), myOptions ) ;
+
+		System.out.println( getHelpExamples() ) ;
+	} 
+	
+	@Override
+	public String getHelpOverview() {
+		return "OOPS! My author hasn't finished me yet! Missing Help Overview!" ;
+	}
+
+	@Override
+	public String getHelpExamples() {
+		return "D'OH! My author hasn't finished me yet! Missing Help Examples!" ; 
+	}
 	
 	public String getActionName() {
 		return action.getName() ;

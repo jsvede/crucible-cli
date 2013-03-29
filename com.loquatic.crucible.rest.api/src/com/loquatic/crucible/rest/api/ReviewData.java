@@ -8,12 +8,15 @@
 
 package com.loquatic.crucible.rest.api;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList ;
+import java.util.List ;
 
-import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+import javax.xml.bind.annotation.XmlAccessType ;
+import javax.xml.bind.annotation.XmlAccessorType ;
+import javax.xml.bind.annotation.XmlSeeAlso ;
+import javax.xml.bind.annotation.XmlType ;
+
+import org.codehaus.jackson.annotate.JsonWriteNullProperties ;
 
 /**
  * <p>Java class for reviewData complex type.
@@ -95,8 +98,8 @@ public class ReviewData {
     @JsonWriteNullProperties(false)
     protected PermId permaId;
 //    @XmlElement(nillable = true)
-//    @JsonWriteNullProperties(false)
-//    protected List<String> permaIdHistory;
+    @JsonWriteNullProperties(false)
+    protected List<String> permaIdHistory;
     protected String projectKey;
     protected String reminderDate;
     protected State state;
@@ -407,7 +410,12 @@ public class ReviewData {
         this.permaId = value;
     }
 
-    /**
+    
+    public void setPermaIdHistory( List<String> permaIdHistory ) {
+			this.permaIdHistory = permaIdHistory ;
+		}
+
+		/**
      * Gets the value of the permaIdHistory property.
      * 
      * <p>
@@ -429,12 +437,12 @@ public class ReviewData {
      * 
      * 
      */
-//    public List<String> getPermaIdHistory() {
-//        if (permaIdHistory == null) {
-//            permaIdHistory = new ArrayList<String>();
-//        }
-//        return this.permaIdHistory;
-//    }
+    public List<String> getPermaIdHistory() {
+        if (permaIdHistory == null) {
+            permaIdHistory = new ArrayList<String>();
+        }
+        return this.permaIdHistory;
+    }
 
     /**
      * Gets the value of the projectKey property.

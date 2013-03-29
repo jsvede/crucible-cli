@@ -3,7 +3,6 @@
 
 <product name="Crucible CLI" uid="com.effectiveui.crucible" application="com.loquatic.crucible.cli.application" version="1.0.0" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -13,7 +12,6 @@
 
    <windowImages/>
 
-
    <launcher name="crucible">
       <solaris/>
       <win useIco="false">
@@ -21,14 +19,12 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
    <plugins>
       <plugin id="com.loquatic.crucible.cli"/>
       <plugin id="com.loquatic.crucible.rest.api"/>
-      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.cli"/>
       <plugin id="org.apache.httpcomponents.httpclient"/>
       <plugin id="org.codehaus.jackson.core.asl"/>

@@ -30,17 +30,12 @@ package com.loquatic.crucible.cli.actions;
 import java.util.Properties ;
 
 import org.apache.commons.cli.CommandLine ;
-import org.apache.commons.cli.HelpFormatter ;
 import org.apache.commons.cli.Options ;
 
-import com.loquatic.crucible.cli.Action;
+import com.loquatic.crucible.cli.Action ;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
-import com.loquatic.crucible.json.JsonHandler ;
 import com.loquatic.crucible.json.ResponseData ;
-import com.loquatic.crucible.rest.api.AddChangeset ;
-import com.loquatic.crucible.rest.api.AddChangesetWrapper ;
-import com.loquatic.crucible.rest.api.ChangesetData ;
 import com.loquatic.crucible.rest.api.ReviewData ;
 import com.loquatic.crucible.rest.api.State ;
 import com.loquatic.crucible.rest.api.UserData ;
@@ -70,10 +65,6 @@ import com.loquatic.crucible.util.TargetUrlUtil ;
  */
 public class CreateReviewAction extends AbstractAction {
 	
-	private Options myOptions ;
-	
-	
-
 	public CreateReviewAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
 		setAction( Action.CREATE_REVIEW ) ;
@@ -146,42 +137,53 @@ public class CreateReviewAction extends AbstractAction {
 	@Override
 	public boolean addOptions(Options options) {
 
-		options.addOption( CommandLineOption.PROJECT_KEY.getName(), 
+		myOptions.addOption( CommandLineOption.PROJECT_KEY.getName(), 
 				                 true, 
 				                 "Required. The project key from Crucible " +
 				                 "for this change." ) ;
-		options.addOption( CommandLineOption.REVIEW_NAME.getName(), 
+		myOptions.addOption( CommandLineOption.REVIEW_NAME.getName(), 
 				                 true, 
 				                 "Optional The name of this " +
 				                 "review that will be shown in Crucible. Defaults " +
 				                 "to 'Review for commit xxxx' where xxxx is the " +
 				                 "changeset specfied.") ;
-		options.addOption( CommandLineOption.DESCRIPTION.getName(), 
+		myOptions.addOption( CommandLineOption.DESCRIPTION.getName(), 
 				                 true, 
 				                 "Required. A description of the changeset being " +
 				                 "reviewed." ) ;
-		options.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
+		myOptions.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
 				                 true, 
 				                 "Optional. Defaults to true." ) ;
-		options.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
+		myOptions.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
 				                 "name of the repository as defined in Crucible." ) ;
 		return true;
 	}
 
+	
 	@Override
-	public void printHelp() {
-		
-		HelpFormatter helpFormatter = new HelpFormatter();
-		helpFormatter.printHelp( getActionName(), myOptions ) ;
+	public String getHelpOverview() {
+		StringBuilder helpOverviewSb = new StringBuilder() ;
+		helpOverviewSb.append( "Create a new review in the specificied Crucible instance.\n" ) ;
+		helpOverviewSb.append( "Typically used in conjuction with addReviewers and addChangesets.\n" ) ;
+		helpOverviewSb.append( "Note: reviews without reviewers get created in a draft state and don't " +
+				"move into the 'out for review' queue till you add users.\n\n" ) ;
 
-		System.out.println( "\n\nExamples:" ) ;
-		System.out.println( "-------------------------------------------------" ) ;
-		System.out.println( "--action createReview --projectKey PROJ-ID " +
+		return helpOverviewSb.toString() ;
+	}
+
+	@Override
+	public String getHelpExamples() {
+		StringBuilder helpExamplesSb = new StringBuilder() ;
+		helpExamplesSb.append( "\n\nExamples:\n" ) ;
+		helpExamplesSb.append( "-------------------------------------------------\n" ) ;
+		helpExamplesSb.append( "--action createReview --projectKey PROJ-ID " +
 			 	            "--reviewName \"My Review of Foo\" --description \"Review of my changes to Foo.\"" +
 				            "--repository myRepo --allowOtherToJoin true" ) ;
 		
-	} 
-	
+
+		return null ;
+	}
+
 	private ReviewData createReviewData( CommandLine commandLine ) {
 		String author = getUserName( commandLine );
 		String reviewTitle = getReviewName( commandLine ) ;
