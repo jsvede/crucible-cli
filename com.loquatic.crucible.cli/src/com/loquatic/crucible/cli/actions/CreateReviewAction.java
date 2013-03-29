@@ -146,30 +146,35 @@ public class CreateReviewAction extends AbstractAction {
 	@Override
 	public boolean addOptions(Options options) {
 
-		options.addOption( CommandLineOption.PROJECT_KEY.getName(), 
+		myOptions.addOption( CommandLineOption.PROJECT_KEY.getName(), 
 				                 true, 
 				                 "Required. The project key from Crucible " +
 				                 "for this change." ) ;
-		options.addOption( CommandLineOption.REVIEW_NAME.getName(), 
+		myOptions.addOption( CommandLineOption.REVIEW_NAME.getName(), 
 				                 true, 
 				                 "Optional The name of this " +
 				                 "review that will be shown in Crucible. Defaults " +
 				                 "to 'Review for commit xxxx' where xxxx is the " +
 				                 "changeset specfied.") ;
-		options.addOption( CommandLineOption.DESCRIPTION.getName(), 
+		myOptions.addOption( CommandLineOption.DESCRIPTION.getName(), 
 				                 true, 
 				                 "Required. A description of the changeset being " +
 				                 "reviewed." ) ;
-		options.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
+		myOptions.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
 				                 true, 
 				                 "Optional. Defaults to true." ) ;
-		options.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
+		myOptions.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
 				                 "name of the repository as defined in Crucible." ) ;
 		return true;
 	}
 
 	@Override
 	public void printHelp() {
+		
+		System.out.println( "Create a new review in the specificied Crucible instance.\n" ) ;
+		System.out.println( "Typically used in conjuction with addReviewers and addChangesets.\n" ) ;
+		System.out.println( "Note: reviews without reviewers get created in a draft state and don't " +
+				"move into the 'out for review' queue till you add users.\n\n" ) ;
 		
 		HelpFormatter helpFormatter = new HelpFormatter();
 		helpFormatter.printHelp( getActionName(), myOptions ) ;
