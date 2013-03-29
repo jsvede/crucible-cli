@@ -104,12 +104,12 @@ public class UserInputProcessor {
 		
 		ActionDispatcher dispatcher = new ActionDispatcher( handler );
 		
-		dispatcher.addOptionsForActions( options ) ;
 		
 		if (args == null || (args != null && args.length == 0)) {
 			printHelp( options, dispatcher ) ;
 		} else {
 			CommandLineParser parser = new GnuParser();
+			dispatcher.addOptionsForActions(options) ;
 			CommandLine commandLine = parser.parse( options, args, false ) ;
 
 			if (commandLine.hasOption("help") && !commandLine.hasOption( "action" ) ) {
@@ -146,7 +146,8 @@ public class UserInputProcessor {
 					e.printStackTrace();
 					System.exit(0);
 				}
-				
+
+//				dispatcher.addOptionsForActions( options ) ;
 
 				String action = commandLine.getOptionValue("action");
 				Action userAction = Action.findByName(action);

@@ -19,12 +19,11 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.apache.commons.cli" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.apache.httpcomponents.httpclient" version="4.2.3" match="greaterOrEqual"/>
       <import plugin="org.codehaus.jackson.mapper.asl" version="1.9.12" match="greaterOrEqual"/>
       <import plugin="org.codehaus.jackson.core.asl" version="1.9.12" match="greaterOrEqual"/>
       <import plugin="com.loquatic.crucible.rest.api" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.loquatic.crucible.cli" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.cli" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
