@@ -65,5 +65,20 @@ public interface IAction {
 	 * @return
 	 */
 	public String getActionName() ;
+	
+	/**
+	 * Each IAction should provide a human friendly description of 
+	 * how to use this IAction returned as a String.
+	 * @return
+	 */
+	public String getHelpOverview() ;
+	
+	/**
+	 * Each IAction should provide a human friendly set of examples
+	 * that show how someone might use this action; bonus points 
+	 * if that output shows all the permutations of itself.
+	 * @return
+	 */
+	public String getHelpExamples() ;
 
 }
