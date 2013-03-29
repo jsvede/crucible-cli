@@ -59,7 +59,7 @@ public class SummarizeReviewAction extends AbstractAction {
 		
 		url.append( reviewId ).append( "/transition?action=action:summarizeReview" ).append( "&" ).append("FEAUTH=").append(getToken() ) ;
 		
-		//System.out.println( "URL: " + url.toString() ) ;
+		System.out.println( "URL: " + url.toString() ) ;
 		
 		try {
 			ResponseData response = getHandler().doPost( url.toString() ) ;
