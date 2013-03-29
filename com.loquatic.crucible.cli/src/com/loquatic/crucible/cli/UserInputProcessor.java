@@ -177,8 +177,8 @@ public class UserInputProcessor {
 	 * @param dispatcher
 	 */
 	private void printHelp( Options options, ActionDispatcher dispatcher, String actionName )  {
-		HelpFormatter helpFormatter = new HelpFormatter();
-		helpFormatter.printHelp(name, options);
+//		HelpFormatter helpFormatter = new HelpFormatter();
+//		helpFormatter.printHelp(name, options);
 		
 		System.out.print( "\n" ) ;
 		
