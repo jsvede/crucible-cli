@@ -105,7 +105,7 @@ public class CreateAuthTokenAction extends AbstractAction {
 		
 		boolean success = false ;
 		String userHomeDir = System.getProperty( "user.home" ) ;
-		String tokenFileName = "crucible.tkn" ;
+		String tokenFileName = "crucible-cli.tkn" ;
 		
 		File tokenFile = new File( userHomeDir + File.separator + tokenFileName ) ;
 		
@@ -135,14 +135,34 @@ public class CreateAuthTokenAction extends AbstractAction {
 
 	@Override
 	public boolean addOptions(Options options) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		myOptions.addOption( CommandLineOption.USERNAME.getName(),
+        true,
+       "The Crucible username under which to " +
+       "perform this action; required if the app " +
+       "hasn't stored an authentication token.");
+
+		myOptions.addOption( CommandLineOption.PASSWORD.getName(), 
+        true,
+        "The password associated with the username provided.");
+
+		return true;
 	}
 
 	@Override
-	public void printHelp() {
-		// TODO Auto-generated method stub
-
+	public String getHelpOverview() {
+		StringBuilder helpOverviewSb = new StringBuilder() ;
+		helpOverviewSb.append(  "Creates an auth token using Crucible's built in facility for this. \nStores the token to your home dir as 'crucible-cli.tkn'.\n" ) ;
+		helpOverviewSb.append( "The auth token is valid as long as you don't log out of Crucible. \nSee the docs at: https://developer.atlassian.com/display/FECRUDEV/Authenticating+REST+Requests") ;
+		return helpOverviewSb.toString() ;
 	}
+
+	@Override
+	public String getHelpExamples() {
+		StringBuilder helpExampleSb = new StringBuilder() ;
+		helpExampleSb.append(  "--action createToken --username user1 --password passwordForUser1" ) ;
+		return helpExampleSb.toString() ;
+	}
+
 
 }
