@@ -25,7 +25,9 @@
    <plugins>
       <plugin id="com.loquatic.crucible.cli"/>
       <plugin id="com.loquatic.crucible.rest.api"/>
-      <plugin id="org.apache.commons.cli"/>
+      <plugin id="javax.transaction" fragment="true"/>
+      <plugin id="org.apache.commons.cli" version="1.2.0"/>
+      <plugin id="org.apache.commons.cli.bin"/>
       <plugin id="org.apache.httpcomponents.httpclient"/>
       <plugin id="org.codehaus.jackson.core.asl"/>
       <plugin id="org.codehaus.jackson.mapper.asl"/>

@@ -68,8 +68,6 @@ public class CreateReviewAction extends AbstractAction {
 	public CreateReviewAction( IProtocolHandler myHandler ) {
 		super( myHandler ) ;
 		setAction( Action.CREATE_REVIEW ) ;
-		myOptions = new Options() ;
-		addOptions( myOptions ) ;
 	}
 
 	@Override
@@ -190,7 +188,11 @@ public class CreateReviewAction extends AbstractAction {
 		String description = getDescription( commandLine ) ;
 		String project = getProjectKey( commandLine ) ;
 		String allowJoinersStr = getAllowOthersToJoin( commandLine ) ;
-		boolean allowJoiners = Boolean.parseBoolean( allowJoinersStr ) ;
+		boolean allowJoiners = false ;
+		if( allowJoinersStr != null ) {
+			allowJoiners = Boolean.parseBoolean( allowJoinersStr ) ;
+		}
+
 		
 		UserData user = createUserData( author )  ;
 		ReviewData reviewData = new ReviewData() ;
@@ -202,7 +204,7 @@ public class CreateReviewAction extends AbstractAction {
 		reviewData.setProjectKey( project ) ;
 		// turns the review on, otherwise it's just a draft
 		reviewData.setState( State.Review ) ;
-		
+		reviewData.setAllowReviewersToJoin( allowJoiners ) ;
 		return reviewData ;
 	}
 	

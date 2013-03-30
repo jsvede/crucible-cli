@@ -80,5 +80,12 @@ public interface IAction {
 	 * @return
 	 */
 	public String getHelpExamples() ;
+	
+	/**
+	 * Retrieve each IAction's list of options it uses.
+	 * 
+	 * @return
+	 */
+	public Options getOptions() ;
 
 }

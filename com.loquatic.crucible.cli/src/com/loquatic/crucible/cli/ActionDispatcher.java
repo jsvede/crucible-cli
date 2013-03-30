@@ -31,7 +31,10 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import com.loquatic.crucible.cli.actions.AbandonReviewAction;
 import com.loquatic.crucible.cli.actions.AddChangesetAction;
@@ -75,23 +78,31 @@ public class ActionDispatcher {
 		return actions ;
 	}
 	 
-	public void addOptionsForActions( Options options ) {
-		for( IAction action:actions.values() ) {
-			action.addOptions( options ) ;
-		}
-	}
-	
+//	public void addOptionsForActions( Options options ) {
+//		for( IAction action:actions.values() ) {
+//			action.addOptions( options ) ;
+//		}
+//	}
+//	
 	/**
 	 * Dispatch 
 	 * @param args
 	 */
-	public boolean dispatchToAction( Action action, CommandLine commandLine, Properties props ) {
+	public boolean dispatchToAction( Action action, String[] args, Properties props ) {
 		
 		boolean success = false ;
+
+		CommandLineParser parser = new GnuParser();
+		
 		
 		if( action != null ) {
-			IAction myAction = actions.get( action ) ;
-			success = myAction.perform( commandLine, props ) ;
+			try {
+				IAction myAction = actions.get( action ) ;
+				CommandLine commandLine = parser.parse( myAction.getOptions(), args, false ) ;
+				success = myAction.perform( commandLine, props ) ;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return success ;

@@ -70,6 +70,10 @@ public abstract class AbstractAction implements IAction {
 		if( tokenExists() ) {
 			loadToken() ;
 		}
+		
+		myOptions = new Options() ;
+		
+		addOptions( myOptions ) ;
 	}
 	
 	public AbstractAction( IProtocolHandler myHandler ) {
@@ -77,6 +81,7 @@ public abstract class AbstractAction implements IAction {
 		setHandler( myHandler ) ;
 		myOptions = new Options() ;
 	}
+	
 	
 	public void setHandler( IProtocolHandler myHandler ) {
 		handler = myHandler ;
@@ -166,6 +171,13 @@ public abstract class AbstractAction implements IAction {
 		System.out.println( getHelpExamples() ) ;
 	} 
 	
+	
+	
+	@Override
+	public Options getOptions() {
+		return myOptions ;
+	}
+
 	@Override
 	public String getHelpOverview() {
 		return "OOPS! My author hasn't finished me yet! Missing Help Overview!" ;

@@ -9,5 +9,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.codehaus.jackson.mapper.asl;bundle-version="1.9.12",
  org.codehaus.jackson.core.asl;bundle-version="1.9.12",
  com.loquatic.crucible.rest.api;bundle-version="1.0.0",
- org.apache.commons.cli;bundle-version="1.0.0"
+ org.apache.commons.cli.bin;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

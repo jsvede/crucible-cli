@@ -361,39 +361,40 @@ public abstract class Parser implements CommandLineParser
         if (!hasOption)
         {
            // throw new UnrecognizedOptionException("Unrecognized option: " + arg, arg);
+        } else {
+
+	        // get the option represented by arg
+	        Option opt = (Option) getOptions().getOption(arg).clone();
+	
+	        // if the option is a required option remove the option from
+	        // the requiredOptions list
+	        if (opt.isRequired())
+	        {
+	            getRequiredOptions().remove(opt.getKey());
+	        }
+	
+	        // if the option is in an OptionGroup make that option the selected
+	        // option of the group
+	        if (getOptions().getOptionGroup(opt) != null)
+	        {
+	            OptionGroup group = getOptions().getOptionGroup(opt);
+	
+	            if (group.isRequired())
+	            {
+	                getRequiredOptions().remove(group);
+	            }
+	
+	            group.setSelected(opt);
+	        }
+	
+	        // if the option takes an argument value
+	        if (opt.hasArg())
+	        {
+	            processArgs(opt, iter);
+	        }
+	
+	        // set the option on the command line
+	        cmd.addOption(opt);
         }
-
-        // get the option represented by arg
-        Option opt = (Option) getOptions().getOption(arg).clone();
-
-        // if the option is a required option remove the option from
-        // the requiredOptions list
-        if (opt.isRequired())
-        {
-            getRequiredOptions().remove(opt.getKey());
-        }
-
-        // if the option is in an OptionGroup make that option the selected
-        // option of the group
-        if (getOptions().getOptionGroup(opt) != null)
-        {
-            OptionGroup group = getOptions().getOptionGroup(opt);
-
-            if (group.isRequired())
-            {
-                getRequiredOptions().remove(group);
-            }
-
-            group.setSelected(opt);
-        }
-
-        // if the option takes an argument value
-        if (opt.hasArg())
-        {
-            processArgs(opt, iter);
-        }
-
-        // set the option on the command line
-        cmd.addOption(opt);
     }
 }

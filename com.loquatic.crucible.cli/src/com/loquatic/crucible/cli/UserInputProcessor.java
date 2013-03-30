@@ -78,26 +78,15 @@ public class UserInputProcessor {
 		Options options = new Options();
 
 		// Global options - available to all IAction instances.
-		options.addOption( CommandLineOption.ACTION.getName(), true, "Required; the action to be performed.");
-		options.addOption( CommandLineOption.USERNAME.getName(),
-						            true,
-						           "The Crucible username under which to " +
-								       "perform this action; required if the app " +
-								       "hasn't stored an authentication token.");
-//		options.addOption( CommandLineOption.CACHE_AUTH.getName(), 
-//				               true,
-//				               "defaults to false; when set to true the app will " +
-//						           "store the authToken for future. When the authToken is " +
-//						           "stored, the user won't need to provide username " +
-//						           "and password.");
-		options.addOption( CommandLineOption.CONFIG.getName(),
-						            true,
-						            "defines the path to the configuration file. A " +
-						            "configuration file defines the URL and context for " +
-						            "the Crucible instance. The default file is ~/crucible-cli.properties");
+		options.addOption( CommandLineOption.CONFIG.getName(), 
+				           true, 
+				           "Optional; if you have a ~/crucible-cli.properties, otherwise required." ) ;
+		options.addOption( CommandLineOption.ACTION.getName(), 
+				           true, 
+				           "Required; the action to be performed.");
 		options.addOption( CommandLineOption.HELP.getName(), 
-				               false, 
-				               "Print help information.");
+				           false, 
+				           "Print help information.");
 		
 		ActionDispatcher dispatcher = new ActionDispatcher( handler );
 		
@@ -106,7 +95,7 @@ public class UserInputProcessor {
 			printHelp( options, dispatcher ) ;
 		} else {
 			CommandLineParser parser = new GnuParser();
-			dispatcher.addOptionsForActions(options) ;
+			
 			CommandLine commandLine = parser.parse( options, args, false ) ;
 
 			if (commandLine.hasOption("help") && !commandLine.hasOption( "action" ) ) {
@@ -156,7 +145,7 @@ public class UserInputProcessor {
 					System.exit(0);
 				} else {
 					
-					dispatcher.dispatchToAction(userAction, commandLine, configProps);
+					dispatcher.dispatchToAction(userAction, args, configProps);
 				}
 			}
 		}

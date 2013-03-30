@@ -42,7 +42,7 @@ public class SummarizeAndCloseReviewAction extends AbstractAction {
 	
 	
 	
-	public SummarizeAndCloseReviewAction(IProtocolHandler handler ) {
+	public SummarizeAndCloseReviewAction( IProtocolHandler handler ) {
 		actions = new LinkedList<IAction>() ;
 		actions.add( new SummarizeReviewAction( handler ) ) ;
 		actions.add( new CloseReviewAction( handler ) ) ;
