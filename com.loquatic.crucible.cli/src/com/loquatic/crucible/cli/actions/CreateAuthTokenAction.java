@@ -153,7 +153,7 @@ public class CreateAuthTokenAction extends AbstractAction {
 	public String getHelpOverview() {
 		StringBuilder helpOverviewSb = new StringBuilder() ;
 		helpOverviewSb.append(  "Creates an auth token using Crucible's built in facility for this. \nStores the token to your home dir as 'crucible-cli.tkn'.\n" ) ;
-		helpOverviewSb.append( "The auth token is valid as long as you don't log out of Crucible. \nSee the docs at: https://developer.atlassian.com/display/FECRUDEV/Authenticating+REST+Requests") ;
+		helpOverviewSb.append( "The auth token is valid as long as you don't log out of Crucible. \n\nSee the docs at: https://developer.atlassian.com/display/FECRUDEV/Authenticating+REST+Requests\n") ;
 		return helpOverviewSb.toString() ;
 	}
 

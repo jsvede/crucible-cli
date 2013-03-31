@@ -49,6 +49,7 @@ public class SummarizeAndCloseReviewAction extends AbstractAction {
 		
 		setAction( Action.SUMMARIZE_AND_CLOSE_REVIEW ) ;
 	}
+	
 
 	@Override
 	public boolean perform( CommandLine commandLine, Properties props ) {

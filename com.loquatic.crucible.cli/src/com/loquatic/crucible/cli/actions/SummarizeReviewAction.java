@@ -32,10 +32,9 @@ import java.util.Properties ;
 import org.apache.commons.cli.CommandLine ;
 import org.apache.commons.cli.Options ;
 
-import com.loquatic.crucible.cli.Action;
+import com.loquatic.crucible.cli.Action ;
 import com.loquatic.crucible.cli.CommandLineOption ;
 import com.loquatic.crucible.json.IProtocolHandler ;
-import com.loquatic.crucible.json.JsonHandler ;
 import com.loquatic.crucible.json.ResponseData ;
 import com.loquatic.crucible.util.TargetUrlUtil ;
 
@@ -90,8 +89,19 @@ public class SummarizeReviewAction extends AbstractAction {
 	}
 
 	@Override
-	public void printHelp() {
-		// TODO Auto-generated method stub
-		
+	public String getHelpOverview() {
+		StringBuilder helpOverviewSb = new StringBuilder() ;
+		helpOverviewSb.append(  "Summarize a review in which everyone has finished reviewing the code.\n" +
+				                    "The review may or may not need to be summarized prior to closing the review.\n" ) ;
+		return helpOverviewSb.toString() ;
 	}
+
+	@Override
+	public String getHelpExamples() {
+		StringBuilder helpExamplesSb = new StringBuilder() ;
+		helpExamplesSb.append( "--action summarizeReview --reviewId FOO-ID" ) ;
+		return helpExamplesSb.toString() ;
+	}
+
+
 }

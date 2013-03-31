@@ -165,17 +165,16 @@ public class UserInputProcessor {
 	 */
 	private void printHelp( Options options, ActionDispatcher dispatcher, String actionName )  {
 		
-		System.out.print( "\n" ) ;
+//		System.out.print( "\n" ) ;
 		
 		Map<Action, IAction> actionsMap = dispatcher.getRegisteredActions() ;
 		
 		if( actionName == null ) {
 			HelpFormatter helpFormatter = new HelpFormatter();
 			helpFormatter.printHelp(name, options);
-			System.out.println( "-------------------------------------------") ;
+			System.out.println( "-------------------------------------------\n") ;
 			System.out.println( "Examples of available Actions:" ) ;
 			for( Action action : actionsMap.keySet() ) {
-				IAction myAction = actionsMap.get( action ) ;
 				System.out.println( "--action " + action.getName() ) ;
 			}
 			System.out.println( "\ntype --action validAction --help for more information" ) ;
@@ -185,8 +184,6 @@ public class UserInputProcessor {
 			System.out.println( "\n" ) ;
 			
 		}
-
-		
 	}
 
 }

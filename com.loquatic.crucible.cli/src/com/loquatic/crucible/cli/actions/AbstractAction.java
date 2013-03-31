@@ -79,7 +79,7 @@ public abstract class AbstractAction implements IAction {
 	public AbstractAction( IProtocolHandler myHandler ) {
 		this() ;
 		setHandler( myHandler ) ;
-		myOptions = new Options() ;
+		//myOptions = new Options() ;
 	}
 	
 	
@@ -167,6 +167,9 @@ public abstract class AbstractAction implements IAction {
 		
 		HelpFormatter helpFormatter = new HelpFormatter();
 		helpFormatter.printHelp( getActionName(), myOptions ) ;
+
+		System.out.println( "\nExamples:" ) ;
+		System.out.println( "-------------------------------------------------" ) ;
 
 		System.out.println( getHelpExamples() ) ;
 	} 

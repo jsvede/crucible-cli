@@ -88,8 +88,18 @@ public class CloseReviewAction extends AbstractAction {
 	}
 
 	@Override
-	public void printHelp() {
-		// TODO Auto-generated method stub
-		
+	public String getHelpOverview() {
+		StringBuilder helpOverviewSb = new StringBuilder() ;
+		helpOverviewSb.append(  "Close a review. The review may or may not need to be summarized prior to closing the review.\n" ) ;
+		return helpOverviewSb.toString() ;
 	}
+
+	@Override
+	public String getHelpExamples() {
+		StringBuilder helpExamplesSb = new StringBuilder() ;
+		helpExamplesSb.append( "--action closeReview --reviewId FOO-ID" ) ;
+		return helpExamplesSb.toString() ;
+	}
+
+	
 }

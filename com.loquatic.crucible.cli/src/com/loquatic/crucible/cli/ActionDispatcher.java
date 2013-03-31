@@ -64,7 +64,7 @@ public class ActionDispatcher {
 		actions.put( Action.ABANDON_REVIEW, new AbandonReviewAction(handler) ) ; 
 		actions.put( Action.CLOSE_REVIEW, new CloseReviewAction(handler) ) ;
 		actions.put( Action.SUMMARIZE_REVIEW, new SummarizeReviewAction(handler) ) ;
-		actions.put( Action.SUMMARIZE_AND_CLOSE_REVIEW, new SummarizeAndCloseReviewAction(handler) ) ;
+		//actions.put( Action.SUMMARIZE_AND_CLOSE_REVIEW, new SummarizeAndCloseReviewAction(handler) ) ;
 		actions.put( Action.ADD_REVIEWERS_TO_REVIEW, new AddReviewersAction( handler ) ) ;
 		actions.put( Action.ADD_CHANGESETS_TO_REVIEW, new AddChangesetAction( handler) ) ;
 	}

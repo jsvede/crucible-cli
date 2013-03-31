@@ -161,9 +161,9 @@ public class CreateReviewAction extends AbstractAction {
 	@Override
 	public String getHelpOverview() {
 		StringBuilder helpOverviewSb = new StringBuilder() ;
-		helpOverviewSb.append( "Create a new review in the specificied Crucible instance.\n" ) ;
-		helpOverviewSb.append( "Typically used in conjuction with addReviewers and addChangesets.\n" ) ;
-		helpOverviewSb.append( "Note: reviews without reviewers get created in a draft state and don't " +
+		helpOverviewSb.append( "Create a new review in the specificied Crucible instance.\n\n" ) ;
+		helpOverviewSb.append( "Typically used in conjuction with addReviewers and addChangesets.\n\n" ) ;
+		helpOverviewSb.append( "Note: reviews without reviewers get created in a draft state and don't\n" +
 				"move into the 'out for review' queue till you add users.\n\n" ) ;
 
 		return helpOverviewSb.toString() ;
@@ -172,14 +172,12 @@ public class CreateReviewAction extends AbstractAction {
 	@Override
 	public String getHelpExamples() {
 		StringBuilder helpExamplesSb = new StringBuilder() ;
-		helpExamplesSb.append( "\n\nExamples:\n" ) ;
-		helpExamplesSb.append( "-------------------------------------------------\n" ) ;
 		helpExamplesSb.append( "--action createReview --projectKey PROJ-ID " +
 			 	            "--reviewName \"My Review of Foo\" --description \"Review of my changes to Foo.\"" +
 				            "--repository myRepo --allowOtherToJoin true" ) ;
 		
 
-		return null ;
+		return helpExamplesSb.toString() ;
 	}
 
 	private ReviewData createReviewData( CommandLine commandLine ) {
