@@ -24,8 +24,8 @@
 
    <plugins>
       <plugin id="com.loquatic.crucible.cli"/>
+      <plugin id="com.loquatic.crucible.cli.tests" fragment="true"/>
       <plugin id="com.loquatic.crucible.rest.api"/>
-      <plugin id="javax.transaction" fragment="true"/>
       <plugin id="org.apache.commons.cli" version="1.2.0"/>
       <plugin id="org.apache.commons.cli.bin"/>
       <plugin id="org.apache.httpcomponents.httpclient"/>
@@ -40,6 +40,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.junit"/>
    </plugins>
 
    <features>

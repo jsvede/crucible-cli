@@ -135,24 +135,29 @@ public class CreateReviewAction extends AbstractAction {
 	@Override
 	public boolean addOptions(Options options) {
 
-		myOptions.addOption( CommandLineOption.PROJECT_KEY.getName(), 
+		options.addOption( CommandLineOption.USERNAME.getName(), 
+                       true, 
+                      "Required. The user name that will be used as the " +
+                      "author/moderator(typically needs to match the value " +
+                      "in the token." ) ;		
+		options.addOption( CommandLineOption.PROJECT_KEY.getName(), 
 				                 true, 
 				                 "Required. The project key from Crucible " +
 				                 "for this change." ) ;
-		myOptions.addOption( CommandLineOption.REVIEW_NAME.getName(), 
+		options.addOption( CommandLineOption.REVIEW_NAME.getName(), 
 				                 true, 
 				                 "Optional The name of this " +
 				                 "review that will be shown in Crucible. Defaults " +
 				                 "to 'Review for commit xxxx' where xxxx is the " +
 				                 "changeset specfied.") ;
-		myOptions.addOption( CommandLineOption.DESCRIPTION.getName(), 
+		options.addOption( CommandLineOption.DESCRIPTION.getName(), 
 				                 true, 
 				                 "Required. A description of the changeset being " +
 				                 "reviewed." ) ;
-		myOptions.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
+		options.addOption( CommandLineOption.ALLOW_OTHERS_TO_JOIN.getName(), 
 				                 true, 
 				                 "Optional. Defaults to true." ) ;
-		myOptions.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
+		options.addOption( CommandLineOption.REPOSITORY.getName(), true, "The " +
 				                 "name of the repository as defined in Crucible." ) ;
 		return true;
 	}

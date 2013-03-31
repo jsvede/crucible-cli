@@ -27,23 +27,24 @@
  */
 package com.loquatic.crucible.cli;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Properties;
+import java.io.File ;
+import java.io.FileNotFoundException ;
+import java.io.IOException ;
+import java.util.LinkedList ;
+import java.util.Map ;
+import java.util.Properties ;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.GnuParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.CommandLine ;
+import org.apache.commons.cli.CommandLineParser ;
+import org.apache.commons.cli.GnuParser ;
+import org.apache.commons.cli.HelpFormatter ;
+import org.apache.commons.cli.Options ;
+import org.apache.commons.cli.ParseException ;
 
-import com.loquatic.crucible.cli.actions.IAction;
-import com.loquatic.crucible.json.IProtocolHandler;
-import com.loquatic.crucible.json.JsonHandler;
-import com.loquatic.crucible.util.PropertiesHandler;
+import com.loquatic.crucible.cli.actions.IAction ;
+import com.loquatic.crucible.json.IProtocolHandler ;
+import com.loquatic.crucible.json.JsonHandler ;
+import com.loquatic.crucible.util.PropertiesHandler ;
 
 /**
  * Leverages the Apache Commons CLI API to handle mapping arguments.
@@ -96,7 +97,9 @@ public class UserInputProcessor {
 		} else {
 			CommandLineParser parser = new GnuParser();
 			
-			CommandLine commandLine = parser.parse( options, args, false ) ;
+			String[] bareMinArgs = getHelpAndActionArgs( args ) ;
+			
+			CommandLine commandLine = parser.parse( options, bareMinArgs, false ) ;
 
 			if (commandLine.hasOption("help") && !commandLine.hasOption( "action" ) ) {
 				printHelp( options, dispatcher ) ;
@@ -145,11 +148,43 @@ public class UserInputProcessor {
 					System.exit(0);
 				} else {
 					
-					dispatcher.dispatchToAction(userAction, args, configProps);
+					dispatcher.dispatchToAction(userAction, args, configProps, options );
 				}
 			}
 		}
 
+	}
+	
+	/**
+	 * Given the full list of args, simply extract the --action and --help
+	 * arguments (if help exists) to establish the basic Options list.
+	 * 
+	 * @param args
+	 * @return
+	 */
+	private String[] getHelpAndActionArgs( String [] args ) {
+		
+		
+		LinkedList<String>bareMinList = new LinkedList<String>() ;
+		
+		for( int x=0; x<args.length; x++ ) {
+			String element = args[x] ;
+			if( element != null ) {
+				if( element.toLowerCase().contains(  "action" ) ) {
+					bareMinList.add( element ) ;
+					bareMinList.add( args[x+1] ) ;
+					continue ;
+				}
+			}
+			if( element.toLowerCase().contains(  "help" ) ) {
+				bareMinList.add( element ) ;
+			}
+		}
+		
+		String[] bareMinimum = new String[bareMinList.size()] ;
+		
+		return bareMinList.toArray( bareMinimum ) ;
+		
 	}
 	
 	private void printHelp( Options options, ActionDispatcher dispatcher )  {
@@ -164,8 +199,6 @@ public class UserInputProcessor {
 	 * @param dispatcher
 	 */
 	private void printHelp( Options options, ActionDispatcher dispatcher, String actionName )  {
-		
-//		System.out.print( "\n" ) ;
 		
 		Map<Action, IAction> actionsMap = dispatcher.getRegisteredActions() ;
 		

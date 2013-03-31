@@ -88,7 +88,7 @@ public class ActionDispatcher {
 	 * Dispatch 
 	 * @param args
 	 */
-	public boolean dispatchToAction( Action action, String[] args, Properties props ) {
+	public boolean dispatchToAction( Action action, String[] args, Properties props, Options options ) {
 		
 		boolean success = false ;
 
@@ -98,7 +98,8 @@ public class ActionDispatcher {
 		if( action != null ) {
 			try {
 				IAction myAction = actions.get( action ) ;
-				CommandLine commandLine = parser.parse( myAction.getOptions(), args, false ) ;
+				myAction.addOptions( options ) ;
+				CommandLine commandLine = parser.parse( options, args, false ) ;
 				success = myAction.perform( commandLine, props ) ;
 			} catch (ParseException e) {
 				e.printStackTrace();

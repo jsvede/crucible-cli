@@ -136,13 +136,13 @@ public class CreateAuthTokenAction extends AbstractAction {
 	@Override
 	public boolean addOptions(Options options) {
 		
-		myOptions.addOption( CommandLineOption.USERNAME.getName(),
+		options.addOption( CommandLineOption.USERNAME.getName(),
         true,
        "The Crucible username under which to " +
        "perform this action; required if the app " +
        "hasn't stored an authentication token.");
 
-		myOptions.addOption( CommandLineOption.PASSWORD.getName(), 
+		options.addOption( CommandLineOption.PASSWORD.getName(), 
         true,
         "The password associated with the username provided.");
 
